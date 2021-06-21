@@ -1,6 +1,5 @@
 function [mu,sigma,trpro,delta] = EMHMM(data,m,mu,sigma,trpro,delta)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+
 
 %trpro=[0.7 0.3;0.1 0.9];
 maxiter=10000;tol=1e-6;
