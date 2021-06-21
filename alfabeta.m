@@ -1,6 +1,6 @@
 function [ la,lb ] = alfabeta(data,m,mu,sigma,trpro,delta)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+% This function computes the logarithms of the forward and backward probabilities
+% Please refer to Zucchini et al., (2017) Equations (4.1) and (4.2) on p. 60 
 x=data';
 n=length(x);
 alpha=zeros(m,n);beta=zeros(m,n);
