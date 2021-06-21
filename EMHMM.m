@@ -1,19 +1,23 @@
 function [mu,sigma,trpro,delta] = EMHMM(data,m,mu,sigma,trpro,delta)
+% EM estimation of a HMM
+%This function implements the EM algorithm as described in Sections 2.1
+% With the initial values lambda, gamma and delta for the natural parameters 
+% In each iteration the logs of the forward and backward probabilities are computed
+% The log- likelihood l, is needed in both E and M steps
 
-
-%trpro=[0.7 0.3;0.1 0.9];
-maxiter=10000;tol=1e-6;
+maxiter=10000; %total number of iterations
+tol=1e-6;      % acceptable threshold
 if exist('delta')==0
    delta=double(stationary(trpro));
 end
-x=data';
+x=data';       % time series of normalized monthly river discharges
 n=length(x);
 munew=mu;
 trpronew=trpro;
 deltanew=delta;
 sigmanew=sigma;
 for iter=1:maxiter
-    lprob=log(normpdf(repmat(x,1,m),repmat(mu,n,1),repmat(sigma,n,1)));
+    lprob=log(normpdf(repmat(x,1,m),repmat(mu,n,1),repmat(sigma,n,1)));    % lognormal of liklihood function
     [la,lb]=alfabeta(data,m,mu,sigma,trpro,delta);
     c=max(la(:,n));
     llk=c+log(sum(exp(la(:,n)-c)));
