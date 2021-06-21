@@ -16,8 +16,12 @@ munew=mu;
 trpronew=trpro;
 deltanew=delta;
 sigmanew=sigma;
+
 for iter=1:maxiter
     lprob=log(normpdf(repmat(x,1,m),repmat(mu,n,1),repmat(sigma,n,1)));    % lognormal of liklihood function
+    
+    % This function computes the logarithms of the forward and backward probabilities
+    % Please refer to Zucchini et al., (2017) Equations (4.1) and (4.2) on p. 60 
     [la,lb]=alfabeta(data,m,mu,sigma,trpro,delta);
     c=max(la(:,n));
     llk=c+log(sum(exp(la(:,n)-c)));
